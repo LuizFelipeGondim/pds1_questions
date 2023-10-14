@@ -4,39 +4,66 @@
 #define MAX 50
 
 struct produto {
-    char nome[MAX];
-    char marca[MAX];
-    float preco;
+  char nome[MAX];
+  char marca[MAX];
+  float preco;
 };
 
 struct controleProduto {
-    char marca[MAX];
-    int quantidade = 0;
-    float valorTotal;
-}
+  char marca[MAX];
+  int quantidade;
+  float valorTotal;
+};
 
 int main() {
   struct produto produtos[TAM];
   struct controleProduto controle[TAM];
-  int contProduto = 0;
+  int contadorMarcasDiferentes = 0;
+  float precoMedioTotal = 0.0;
 
   for (int i = 0; i < TAM; ++i) {
     scanf("%49s %49s %f", produtos[i].nome, produtos[i].marca, &produtos[i].preco);
   }
 
-  strcpy(controle[0].marca, produtos[0].marca);
-
-  for (int i = 0; i < TAM; ++i) {
-      for (int j = 0; j < TAM; ++j) {
-          
+  for (int i = 0; i < 8; i++) {
+    int isDiferente = 1;
+    for (int j = 0; j <= contadorMarcasDiferentes; j++) {
+      if (strcmp(produtos[i].marca, controle[j].marca) == 0) {
+        isDiferente = 0;
+        break;
       }
-    if (strcmp(controle[i].marca, produtos[i].marca) == 0){
-        controle[i].quantidade++;
-
-        controle[i].valorTotal = produtos[i].preco;
+    }
+    if (isDiferente) {
+      strcpy(controle[contadorMarcasDiferentes].marca, produtos[i].marca);
+      contadorMarcasDiferentes++;
     }
   }
-  
 
+    for (int i = 0; i < contadorMarcasDiferentes; ++i) {
+      controle[i].quantidade = 0;
+    }
+
+
+  for (int i = 0; i < TAM; ++i) {
+    for (int j = 0; j < contadorMarcasDiferentes; ++j) {
+        
+      if (strcmp(produtos[i].marca, controle[j].marca) == 0){
+        controle[j].quantidade++;
+
+        controle[j].valorTotal += produtos[i].preco;
+        precoMedioTotal += produtos[i].preco;
+      }
+    }
+  }
+
+  for (int i = 0; i < contadorMarcasDiferentes; ++i) {
+    printf("%s %d \n", controle[i].marca, controle[i].quantidade);
+  }
+
+  printf("media total %.2f \n", precoMedioTotal/TAM);
+
+  for (int i = 0; i < contadorMarcasDiferentes; ++i) {
+    printf("media %s %.2f \n", controle[i].marca, controle[i].valorTotal/controle[i].quantidade);
+  }
   return 0;
 }
