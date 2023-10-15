@@ -19,7 +19,7 @@ int main() {
   struct produto produtos[TAM];
   struct controleProduto controle[TAM];
   int contadorMarcasDiferentes = 0;
-  float precoMedioTotal = 0.0;
+  float precoMedioTotal = 0;
 
   for (int i = 0; i < TAM; ++i) {
     scanf("%49s %49s %f", produtos[i].nome, produtos[i].marca, &produtos[i].preco);
@@ -35,13 +35,11 @@ int main() {
     }
     if (isDiferente) {
       strcpy(controle[contadorMarcasDiferentes].marca, produtos[i].marca);
+      controle[contadorMarcasDiferentes].quantidade = 0;
+      controle[contadorMarcasDiferentes].valorTotal = 0.0;
       contadorMarcasDiferentes++;
     }
   }
-
-    for (int i = 0; i < contadorMarcasDiferentes; ++i) {
-      controle[i].quantidade = 0;
-    }
 
 
   for (int i = 0; i < TAM; ++i) {
