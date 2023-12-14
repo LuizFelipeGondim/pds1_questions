@@ -39,7 +39,7 @@ int main() {
     primos(m, &p1, &p2);
 
     printf("%d \n", p1);
-    printf("%d", p2);
+    printf("%d \n", p2);
 
     return 0;
 }
