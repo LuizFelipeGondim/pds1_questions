@@ -8,3 +8,4 @@ function filtrarNumeros(array){
 }
 
 console.log(filtrarNumeros(["Javascript", 1, "3", "Web", 0]));
+console.log(filtrarNumeros(["Java", "PHP"]));
