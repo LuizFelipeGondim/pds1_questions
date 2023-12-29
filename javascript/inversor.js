@@ -5,9 +5,9 @@ o retorno sera o numero inverso. Se o parametro de entrada nao for nenhum dos ti
 
 function inversor(valor){
 
-  if(typeof valor == 'boolean'){
+  if(typeof valor === 'boolean'){
     return !valor;
-  } else if (typeof valor == 'number') {
+  } else if (typeof valor === 'number') {
     return -valor;
   } else {
     return `Booleano ou numero esperados, mas o parametro eh do tipo ${typeof valor}`;
